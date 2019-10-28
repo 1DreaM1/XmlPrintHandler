@@ -1,7 +1,8 @@
-# XmlPrintSerializer
-XmlPrintSerializer
+# XMlPrintSerializer
 
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
+```csharp
 // POLE POLOŽIEK
             string[,] receiptItems = new string[2 /*Musí udávať presný počet položiek --> Inak Error: System.NullReferenceException !*/, 8 /*Nemeniť !*/];
             for (int index = 0; index < 2; index++) {
@@ -36,3 +37,11 @@ XmlPrintSerializer
                 AfterFooterValue = "Ďakujeme",          // Text na konci dokladu
                 items = receiptItems                    // Pole položiek
             });
+```
+
+
+
+License
+----
+
+Apache-2.0
