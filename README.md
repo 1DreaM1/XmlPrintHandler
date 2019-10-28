@@ -4,7 +4,7 @@
 
 ```csharp
 // POLE POLOŽIEK
-            string[,] receiptItems = new string[2 /*Musí udávať presný počet položiek --> Inak Error: System.NullReferenceException !*/, 8 /*Nemeniť !*/];
+string[,] receiptItems = new string[2 /*Musí udávať presný počet položiek --> Inak Error: System.NullReferenceException !*/, 8 /*Nemeniť !*/];
             for (int index = 0; index < 2; index++) {
                 receiptItems[index, 0] = "Položka 1";   // Názov položky
                 receiptItems[index, 1] = "K";           // Typ položky
