@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 ```csharp
+using XmlPrintSerializer;
+
 // POLE POLOŽIEK
 string[,] receiptItems = new string[2 /*Musí udávať presný počet položiek --> Inak Error: System.NullReferenceException !*/, 8 /*Nemeniť !*/];
 for (int index = 0; index < 2; index++) {
