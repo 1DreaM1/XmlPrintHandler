@@ -211,7 +211,7 @@ namespace XmlPrintSerializer
                     XmlElement Item = doc.CreateElement("Item");
 
                     XmlAttribute Name = doc.CreateAttribute("Name");
-                    Name.Value = GetLine(xmlData.items[i, 0], GetLine(xmlData.items[i, 7], xmlData.items[i, 4], 11), lineLength);
+                    Name.Value = GetLine(xmlData.items[i, 0], GetLine(xmlData.items[i, 7], xmlData.items[i, 4], 11, (int)xmlData.ReceiptLength), lineLength, (int)xmlData.ReceiptLength);
                     XmlAttribute ItemType = doc.CreateAttribute("ItemType");
                     ItemType.Value = xmlData.items[i, 1];
                     XmlAttribute Quantity = doc.CreateAttribute("Quantity");
@@ -270,16 +270,26 @@ namespace XmlPrintSerializer
             }
         }
 
-        internal string GetLine(string leftText, string rightText, int lineHeight)
+        
+        internal string GetLine(string leftText, string rightText, int lineWidth, int defaultLineWidth)
         {
-            int betweenTextLine = lineHeight - (leftText.Length + rightText.Length);
+            int betweenTextLine = lineWidth - (leftText.Length + rightText.Length);
             string line = leftText;
 
             if (betweenTextLine < 0)
             {
-                double i = leftText.Length / lineHeight;
-                int overflowTextLength = leftText.Length - ((int)Math.Floor(i) * lineHeight);
-                betweenTextLine = lineHeight - (overflowTextLength + rightText.Length);
+                double i = leftText.Length / defaultLineWidth;
+                int overflowTextLength = leftText.Length - ((int)Math.Ceiling(i) * defaultLineWidth);
+
+                int extendedLineLength = 72;
+                switch (defaultLineWidth)
+                {
+                    case 42:
+                        extendedLineLength = 63;
+                        break;
+                }
+
+                betweenTextLine = (defaultLineWidth - overflowTextLength) + (extendedLineLength - defaultLineWidth - rightText.Length);
             }
 
             for (int x = 0; x < betweenTextLine; x++)
