@@ -90,14 +90,14 @@ namespace XmlPrintHandler
                 if (xmlData.VystavilValue != null || xmlData.VystavilValue != String.Empty)
                 {
                     XmlAttribute Vystavil = doc.CreateAttribute("Vystavil");
-                    Vystavil.Value = xmlData.VystavilValue;
+                    Vystavil.Value = "\x0A" + "Vystavil: " + xmlData.VystavilValue;
                     PrintParams.Attributes.Append(Vystavil);
                 }
 
                 if (xmlData.ZakaznikValue != null || xmlData.ZakaznikValue != String.Empty)
                 {
                     XmlAttribute Zakaznik = doc.CreateAttribute("Zakaznik");
-                    Zakaznik.Value = xmlData.ZakaznikValue;
+                    Zakaznik.Value = "\x0A" + "Zákazník: " + xmlData.ZakaznikValue;
                     PrintParams.Attributes.Append(Zakaznik);
                 }
 
