@@ -1,4 +1,4 @@
 language: csharp
-solution: XmlPrintSerializer.sln
+solution: XmlPrintHandler.sln
 mono:
   - latest
