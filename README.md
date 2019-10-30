@@ -41,6 +41,8 @@ string xml = xmlHandler.BuildXML(new XmlData()
 });
 ```
 
+XML:
+
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <RegisterReceiptRequest xmlns:ekasa="http://financnasprava.sk/ekasa/schema/v2">
