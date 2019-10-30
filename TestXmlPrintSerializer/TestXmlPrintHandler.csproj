@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>TestXmlPrintSerializer.Program</StartupObject>
+    <StartupObject>TestXmlPrintHandler.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -84,9 +84,9 @@
     <None Include="Properties\app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XmlPrintSerializer\XmlPrintSerializer.csproj">
+    <ProjectReference Include="..\XmlPrintSerializer\XmlPrintHandler.csproj">
       <Project>{8eebc8fe-7c4d-4f1e-b60b-bc3f19e6f1b0}</Project>
-      <Name>XmlPrintSerializer</Name>
+      <Name>XmlPrintHandler</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

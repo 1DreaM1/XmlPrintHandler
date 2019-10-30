@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlPrintSerializer", "XmlPrintSerializer\XmlPrintSerializer.csproj", "{8EEBC8FE-7C4D-4F1E-B60B-BC3F19E6F1B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlPrintHandler", "XmlPrintSerializer\XmlPrintHandler.csproj", "{8EEBC8FE-7C4D-4F1E-B60B-BC3F19E6F1B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestXmlPrintSerializer", "TestXmlPrintSerializer\TestXmlPrintSerializer.csproj", "{CF5DA798-73D6-4045-BD80-2685F27106AD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestXmlPrintHandler", "TestXmlPrintSerializer\TestXmlPrintHandler.csproj", "{CF5DA798-73D6-4045-BD80-2685F27106AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

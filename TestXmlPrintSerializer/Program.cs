@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using XmlPrintSerializer;
+using XmlPrintHandler;
 
-namespace TestXmlPrintSerializer
+namespace TestXmlPrintHandler
 {
     class Program
     {

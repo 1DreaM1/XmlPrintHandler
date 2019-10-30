@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading;
 using System.Xml;
 
-namespace XmlPrintSerializer
+namespace XmlPrintHandler
 {
     /// <summary>
     /// XmlPrintSerializer, Generovanie XML pre tlač fiškálneho dokadu
