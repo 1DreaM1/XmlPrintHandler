@@ -41,6 +41,40 @@ string xml = xmlHandler.BuildXML(new XmlData()
 });
 ```
 
+```xml
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RegisterReceiptRequest xmlns:ekasa="http://financnasprava.sk/ekasa/schema/v2">
+	<Header />
+	<PrintParams 
+		BeforeHeader="" 
+		AfterHeader="" 
+		BeforeFooter="" 
+		AfterFooter="Ďakujeme" 
+		Vystavil="Pre 1" 
+		Zakaznik="Zak 1" 
+		Total1="58.00" 
+		Total2="30.00" 
+		Paycash="845.00" 
+		Paycard="12.00" />
+	<ReceiptData 
+		IssueDate="2019-10-30T16:18:25+01:00" 
+		Paragon="true" 
+		ParagonNumber="6541" 
+		BasicVatAmount="10" 
+		ReducedVatAmount="4" 
+		TaxBaseBasic="20" 
+		TaxBaseReduced="54" 
+		TaxFreeAmount="5" 
+		Amount="154.24" 
+		ReceiptType="PD">
+		<Items>
+			<Item Name="Položka 1   ks     2.50" ItemType="K" Quantity="2" VatRate="20.00" Price="5.00" />
+			<Item Name="Položka 1   ks     2.50" ItemType="K" Quantity="2" VatRate="20.00" Price="5.00" />
+		</Items>
+	</ReceiptData>
+</RegisterReceiptRequest>
+```
+
 
 
 License
