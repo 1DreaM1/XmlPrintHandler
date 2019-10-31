@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/1DreaM1/XmlPrintHandler.svg?branch=master)](https://travis-ci.org/1DreaM1)
 
+Vstupné hodnoty:
 ```csharp
 using XmlPrintSerializer;
 
@@ -41,7 +42,7 @@ string xml = xmlHandler.BuildXML(new XmlData()
 });
 ```
 
-XML:
+Vygenerované XML:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
