@@ -1,6 +1,6 @@
 # XMlPrintSerializer
 
-[![Build Status](https://travis-ci.org/1DreaM1/XmlPrintSerializer.svg?branch=master)](https://travis-ci.org/1DreaM1)
+[![Build Status](https://travis-ci.org/1DreaM1/XmlPrintHandler.svg?branch=master)](https://travis-ci.org/1DreaM1)
 
 ```csharp
 using XmlPrintSerializer;
