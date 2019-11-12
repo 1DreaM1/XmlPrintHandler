@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/1DreaM1/XmlPrintHandler.svg?branch=master)](https://travis-ci.org/1DreaM1)
 
-Xml Builder pre fiskálnu a nefiskálnu tlač pre driver **TaxIS.dll**.
+Xml Builder na fiskálnu a nefiskálnu tlač pre driver **TaxIS.dll**.
 
 Vstupné hodnoty:
 ```csharp
