@@ -1,6 +1,7 @@
 # XMlPrintSerializer
 
 [![Build Status](https://travis-ci.org/1DreaM1/XmlPrintHandler.svg?branch=master)](https://travis-ci.org/1DreaM1)
+![GitHub](https://img.shields.io/github/license/1DreaM1/XmlPrintHandler)
 
 Xml Builder na fiskálnu a nefiskálnu tlač pre driver **TaxIS.dll**.
 
