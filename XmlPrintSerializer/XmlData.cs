@@ -14,9 +14,19 @@ namespace XmlPrintHandler
         public ReceiptLength ReceiptLength { get; set; }
 
         /// <summary>
+        /// Reverzná tlač ceny dokladu
+        /// </summary>
+        public Reverse UseReverse { get; set; }
+
+        /// <summary>
         /// Typ dokladu
         /// </summary>
         public string ReceiptTypeValue { get; set; }
+
+        /// <summary>
+        /// Int. číslo dokladu
+        /// </summary>
+        public string ReceiptNumberValue { get; set; }
 
         /// <summary>
         /// UUID
@@ -63,6 +73,11 @@ namespace XmlPrintHandler
         /// </summary>
         public string InvoiceNumberValue { get; set; }
 
+        /// <summary>
+        /// Výmenný poukaz
+        /// </summary>
+        public string VoucherValue { get; set; }
+
 
         /// <summary>
         /// Vystavil
@@ -81,7 +96,7 @@ namespace XmlPrintHandler
         public string[,] items { get; set; }
 
         /// <summary>
-        /// ZZaplatené hotovosťou
+        /// Zaplatené hotovosťou
         /// </summary>
         public string PayCash { get; set; }
 
@@ -90,6 +105,15 @@ namespace XmlPrintHandler
         /// </summary>
         public string PayCard { get; set; }
 
+        /// <summary>
+        /// Zaplatené stravenkami
+        /// </summary>
+        public string PayStr { get; set; }
+
+        /// <summary>
+        /// Zaplatené výmenným poukazom
+        /// </summary>
+        public string PayVmp { get; set; }
 
         /// <summary>
         /// Text pred hlavičkou dokladu

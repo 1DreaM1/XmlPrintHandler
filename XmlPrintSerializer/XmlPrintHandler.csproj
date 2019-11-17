@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ReceiptLength.cs" />
+    <Compile Include="Reverse.cs" />
     <Compile Include="XmlHandler.cs" />
     <Compile Include="XmlData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

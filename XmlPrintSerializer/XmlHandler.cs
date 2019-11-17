@@ -20,24 +20,12 @@ namespace XmlPrintHandler
          * 
          */
 
-        public XmlHandler()
-        {
-            SetCulture();
-        }
-
-        internal void SetCulture()
-        {
-            CultureInfo nonInvariantCulture = new CultureInfo("en-US");
-            nonInvariantCulture.NumberFormat.NumberDecimalSeparator = ".";
-            //nonInvariantCulture.NumberFormat.NumberGroupSeparator = " ";
-            Thread.CurrentThread.CurrentCulture = nonInvariantCulture;
-        }
-
         /// <summary>
         /// Generuje XML pripravené pre odoslanie na tlač
         /// </summary>
         /// <param name="xmlData"></param>
         /// <returns></returns>
+
         public string BuildXML(XmlData xmlData)
         {
             XmlDocument doc = new XmlDocument();
@@ -59,48 +47,49 @@ namespace XmlPrintHandler
                 RegisterReceiptRequest.AppendChild(Header);
 
                 XmlElement PrintParams = doc.CreateElement("PrintParams");
-
-                if (xmlData.BeforeHeaderValue != null || xmlData.BeforeHeaderValue != String.Empty) {
+                                                
+                if (xmlData.BeforeHeaderValue != null)
+                {
                     XmlAttribute BeforeHeader = doc.CreateAttribute("BeforeHeader");
                     BeforeHeader.Value = xmlData.BeforeHeaderValue;
                     PrintParams.Attributes.Append(BeforeHeader);
                 }
 
-                if (xmlData.AfterHeaderValue != null || xmlData.AfterHeaderValue != String.Empty)
+                if (xmlData.AfterHeaderValue != null)
                 {
                     XmlAttribute AfterHeader = doc.CreateAttribute("AfterHeader");
                     AfterHeader.Value = xmlData.AfterHeaderValue;
                     PrintParams.Attributes.Append(AfterHeader);
                 }
 
-                if (xmlData.BeforeFooterValue != null || xmlData.BeforeFooterValue != String.Empty)
+                if (xmlData.BeforeFooterValue != null)
                 {
                     XmlAttribute BeforeFooter = doc.CreateAttribute("BeforeFooter");
                     BeforeFooter.Value = xmlData.BeforeFooterValue;
                     PrintParams.Attributes.Append(BeforeFooter);
                 }
 
-                if (xmlData.AfterFooterValue != null || xmlData.AfterFooterValue != String.Empty)
+                if (xmlData.AfterFooterValue != null)
                 {
                     XmlAttribute AfterFooter = doc.CreateAttribute("AfterFooter");
-                    AfterFooter.Value = xmlData.AfterFooterValue;
+                    AfterFooter.Value = "\x0A" + xmlData.AfterFooterValue + "\x0A";
                     PrintParams.Attributes.Append(AfterFooter);
                 }
 
-                if (xmlData.VystavilValue != null || xmlData.VystavilValue != String.Empty)
+                if (xmlData.VystavilValue != null)
                 {
                     XmlAttribute Vystavil = doc.CreateAttribute("Vystavil");
-                    Vystavil.Value = "\x0A" + "Vystavil: " + xmlData.VystavilValue;
+                    Vystavil.Value = "Vystavil: " + xmlData.VystavilValue;
                     PrintParams.Attributes.Append(Vystavil);
                 }
 
-                if (xmlData.ZakaznikValue != null || xmlData.ZakaznikValue != String.Empty)
+                if (xmlData.ZakaznikValue != null)
                 {
                     XmlAttribute Zakaznik = doc.CreateAttribute("Zakaznik");
-                    Zakaznik.Value = "\x0A" + "Zákazník: " + xmlData.ZakaznikValue;
+                    Zakaznik.Value = "Zákazník: " + xmlData.ZakaznikValue;
                     PrintParams.Attributes.Append(Zakaznik);
                 }
-
+                
                 XmlAttribute Total1 = doc.CreateAttribute("Total1");
                 double baseReduced = xmlData.TaxBaseReducedValue.Equals(String.Empty) ? 0.00 : double.Parse(xmlData.TaxBaseReducedValue, CultureInfo.InvariantCulture);
                 double vatReduced = xmlData.ReducedVatAmountValue.Equals(String.Empty) ? 0.00 : double.Parse(xmlData.ReducedVatAmountValue, CultureInfo.InvariantCulture);
@@ -114,18 +103,50 @@ namespace XmlPrintHandler
                 PrintParams.Attributes.Append(Total1);
                 PrintParams.Attributes.Append(Total2);
 
-                if (xmlData.PayCash != null || xmlData.PayCash != String.Empty)
+                if (xmlData.PayCash != null)
                 {
                     XmlAttribute PayCash = doc.CreateAttribute("Paycash");
-                    PayCash.Value = double.Parse(xmlData.PayCash, CultureInfo.InvariantCulture).ToString("N2").Replace(",", "");
+                    PayCash.Value = xmlData.PayCash;
                     PrintParams.Attributes.Append(PayCash);
                 }
 
-                if (xmlData.PayCard != null || xmlData.PayCard != String.Empty)
+                if (xmlData.PayCard != null)
                 {
                     XmlAttribute PayCard = doc.CreateAttribute("Paycard");
-                    PayCard.Value = double.Parse(xmlData.PayCard, CultureInfo.InvariantCulture).ToString("N2").Replace(",", "");
+                    PayCard.Value = xmlData.PayCard;
                     PrintParams.Attributes.Append(PayCard);
+                }
+
+                if (xmlData.PayStr != null)
+                {
+                    XmlAttribute PayStr = doc.CreateAttribute("Paystr");
+                    PayStr.Value = xmlData.PayStr;
+                    PrintParams.Attributes.Append(PayStr);
+                }
+
+                if (xmlData.PayVmp != null)
+                {
+                    XmlAttribute PayVmp = doc.CreateAttribute("Payvmp");
+                    PayVmp.Value = xmlData.PayVmp;
+                    PrintParams.Attributes.Append(PayVmp);
+                }
+
+                XmlAttribute IntCisloDokladu = doc.CreateAttribute("IntCisloDokladu");
+                IntCisloDokladu.Value = xmlData.ReceiptNumberValue;
+                PrintParams.Attributes.Append(IntCisloDokladu);
+
+                if (xmlData.UseReverse == Reverse.Enable)
+                {
+                    XmlAttribute ReverseOn = doc.CreateAttribute("UseReverse");
+                    ReverseOn.Value = "\r";
+                    PrintParams.Attributes.Append(ReverseOn);
+                }
+
+                if (xmlData.VoucherValue != null)
+                {
+                    XmlAttribute Voucher = doc.CreateAttribute("VoucherNumber");
+                    Voucher.Value = xmlData.VoucherValue;
+                    PrintParams.Attributes.Append(Voucher);
                 }
 
                 RegisterReceiptRequest.AppendChild(PrintParams);
@@ -198,20 +219,12 @@ namespace XmlPrintHandler
                 XmlElement Items = doc.CreateElement("Items");
                 ReceiptData.AppendChild(Items);
 
-                int lineLength = 72;
-                switch (xmlData.ReceiptLength)
-                {
-                    case ReceiptLength.Small:
-                        lineLength = 63;
-                        break;
-                }
-
                 for (int i = 0; i < xmlData.items.GetLength(0); i++)
                 {
                     XmlElement Item = doc.CreateElement("Item");
 
                     XmlAttribute Name = doc.CreateAttribute("Name");
-                    Name.Value = GetLine(xmlData.items[i, 0], GetLine(xmlData.items[i, 7], xmlData.items[i, 4], 11, (int)xmlData.ReceiptLength), lineLength, (int)xmlData.ReceiptLength);
+                    Name.Value = xmlData.items[i, 0];
                     XmlAttribute ItemType = doc.CreateAttribute("ItemType");
                     ItemType.Value = xmlData.items[i, 1];
                     XmlAttribute Quantity = doc.CreateAttribute("Quantity");
@@ -227,13 +240,25 @@ namespace XmlPrintHandler
                     }
 
                     XmlAttribute Price = doc.CreateAttribute("Price");
-                    Price.Value = countPrice(xmlData.items[i, 4], xmlData.items[i, 2]);
+                    Price.Value = xmlData.items[i, 5];
 
                     Item.Attributes.Append(Name);
                     Item.Attributes.Append(ItemType);
                     Item.Attributes.Append(Quantity);
                     Item.Attributes.Append(VatRate);
                     Item.Attributes.Append(Price);
+
+                    XmlElement ItemPrintParams = doc.CreateElement("ItemPrintParams");
+
+                    XmlAttribute MJ = doc.CreateAttribute("MJ");
+                    MJ.Value = xmlData.items[i, 7];
+                    ItemPrintParams.Attributes.Append(MJ);
+
+                    XmlAttribute JCena = doc.CreateAttribute("JCena");
+                    JCena.Value = xmlData.items[i, 4];
+                    ItemPrintParams.Attributes.Append(JCena);
+
+                    Item.AppendChild(ItemPrintParams);
 
                     Items.AppendChild(Item);
                 }
@@ -247,59 +272,11 @@ namespace XmlPrintHandler
                 return stringWriter.ToString();
             }
             catch (Exception e)
-            {
-                Console.WriteLine(e.Message + Environment.NewLine + e.GetType());
-                return String.Empty;
+            { 
+                return e.Message + e.StackTrace;
             }
         }
-
-        internal static string countPrice(string priceString, string qtyString)
-        {
-            try
-            {
-                double price = double.Parse(priceString, CultureInfo.InvariantCulture);
-                double qty = double.Parse(qtyString, CultureInfo.InvariantCulture);
-
-                double count = price * qty;
-                return count.ToString("N2").Replace(",", "");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message + Environment.NewLine + e.GetType());
-                return String.Empty;
-            }
-        }
-
         
-        internal string GetLine(string leftText, string rightText, int lineWidth, int defaultLineWidth)
-        {
-            int betweenTextLine = lineWidth - (leftText.Length + rightText.Length);
-            string line = leftText;
-
-            if (betweenTextLine < 0)
-            {
-                double i = leftText.Length / defaultLineWidth;
-                int overflowTextLength = leftText.Length - ((int)Math.Ceiling(i) * defaultLineWidth);
-
-                int extendedLineLength = 72;
-                switch (defaultLineWidth)
-                {
-                    case 42:
-                        extendedLineLength = 63;
-                        break;
-                }
-
-                betweenTextLine = (defaultLineWidth - overflowTextLength) + (extendedLineLength - defaultLineWidth - rightText.Length);
-            }
-
-            for (int x = 0; x < betweenTextLine; x++)
-            {
-                line += " ";
-            }
-            line += rightText;
-            return line;
-        }
-
         internal string getDate()
         {
             DateTime date = DateTime.Now;

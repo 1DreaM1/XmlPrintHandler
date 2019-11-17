@@ -53,7 +53,11 @@ namespace TestXmlPrintHandler
                 ZakaznikValue = "Zak 1",                // Zákazník
                 PayCard = "12",                         // Zaplatené kartou
                 PayCash = "845",                        // Zaplatené hotovosťou
+                PayStr = "4",                         // Zaplatené stravenkami
+                PayVmp = "20",                         // Zaplatené výmenným poukazom
                 AfterFooterValue = "Ďakujeme",          // Text na konci dokladu
+                UseReverse = Reverse.Enable,            // Použiť reverznú tlač
+                ReceiptNumberValue = "GH6540901",       // Int. číslo dokladu
                 items = receiptItems                    // Pole položiek
             });
 
